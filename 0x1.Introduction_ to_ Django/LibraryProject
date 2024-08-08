@@ -1,1 +1,10 @@
+LibraryProject/
+    manage.py
+    LibraryProject/
+        __init__.py
+        settings.py
+        urls.py
+        wsgi.py
+        asgi.py
+README.md
 
