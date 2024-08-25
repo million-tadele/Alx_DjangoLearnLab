@@ -15,6 +15,8 @@ class LibraryDetailView(DetailView):
     model = Library
     template_name = 'relationship_app/library_detail.html'
     context_object_name = 'library'
+    
+    "from django.contrib.auth import login"
 from django.contrib.auth import views as auth_views
 from django.urls import path
 from django.contrib.auth.forms import UserCreationForm
