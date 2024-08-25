@@ -30,6 +30,8 @@ urlpatterns = [
 ]
 
 
+"add_book/", "edit_book/"
+
 from django.urls import path
 from .views import add_book, edit_book, delete_book
 
