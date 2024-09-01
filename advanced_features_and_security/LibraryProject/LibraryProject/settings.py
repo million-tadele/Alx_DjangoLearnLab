@@ -126,7 +126,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-
+"bookshelf.CustomUser"
 
 
 from django.conf import settings
