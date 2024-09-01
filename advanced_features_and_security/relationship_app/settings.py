@@ -3,3 +3,10 @@ Type "help", "copyright", "credits" or "license()" for more information.
 >>> AUTH_USER_MODEL = 'your_app_name.CustomUser'
 # settings.py
 AUTH_USER_MODEL = 'your_app_name.CustomUser'
+
+
+from django.conf import settings
+
+# Example usage in a foreign key
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
