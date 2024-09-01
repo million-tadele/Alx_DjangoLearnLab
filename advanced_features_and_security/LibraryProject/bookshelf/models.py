@@ -45,3 +45,44 @@ class CustomUser(AbstractUser):
     profile_photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True)
 
     objects = CustomUserManager()
+
+
+
+
+
+from django.db import models
+
+class Book(models.Model):
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=200)
+    published_date = models.DateField()
+
+    class Meta:
+        permissions = [
+            ('can_view', 'Can view book'),
+            ('can_create', 'Can create book'),
+            ('can_edit', 'Can edit book'),
+            ('can_delete', 'Can delete book'),
+        ]
+
+
+from django.contrib.auth.models import Group, Permission
+
+# Example script to add permissions to groups
+editors_group, created = Group.objects.get_or_create(name='Editors')
+viewers_group, created = Group.objects.get_or_create(name='Viewers')
+admins_group, created = Group.objects.get_or_create(name='Admins')
+
+# Assign permissions to Editors
+edit_permission = Permission.objects.get(codename='can_edit')
+create_permission = Permission.objects.get(codename='can_create')
+editors_group.permissions.add(edit_permission, create_permission)
+
+# Assign permissions to Viewers
+view_permission = Permission.objects.get(codename='can_view')
+viewers_group.permissions.add(view_permission)
+
+# Assign all permissions to Admins
+admin_permissions = Permission.objects.filter(codename__in=['can_view', 'can_create', 'can_edit', 'can_delete'])
+admins_group.permissions.set(admin_permissions)
+
