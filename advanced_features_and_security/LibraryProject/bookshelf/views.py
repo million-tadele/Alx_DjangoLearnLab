@@ -21,3 +21,26 @@ def edit_book(request, book_id):
 def delete_book(request, book_id):
     # Code to delete the book
     pass
+
+
+<!-- form_example.html -->
+<form method="post" action="/submit/">
+    {% csrf_token %}
+    <!-- form fields here -->
+    <button type="submit">Submit</button>
+</form>
+
+from django.shortcuts import render
+from .models import Book
+
+def search_books(request):
+    query = request.GET.get('q', '')
+    books = Book.objects.filter(title__icontains=query)
+    return render(request, 'bookshelf/book_list.html', {'books': books})
+
+
+from django import forms
+from .models import Book
+
+class BookSearchForm(forms.Form):
+    query = forms.CharField(max_length=100)
