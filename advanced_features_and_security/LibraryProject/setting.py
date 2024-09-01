@@ -14,3 +14,31 @@ SECURE_HSTS_SECONDS = 3600  # Enable HTTP Strict Transport Security for 1 hour
 SECURE_SSL_REDIRECT = True  # Redirect all non-HTTPS requests to HTTPS
 
 
+INSTALLED_APPS = [
+    ...
+    'csp',
+]
+
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_SCRIPT_SRC = ("'self'", 'https://trustedscripts.example.com')
+CSP_STYLE_SRC = ("'self'", 'https://trustedstyles.example.com')
+
+from django.utils.deprecation import MiddlewareMixin
+
+class ContentSecurityPolicyMiddleware(MiddlewareMixin):
+    def process_response(self, request, response):
+        response['Content-Security-Policy'] = "default-src 'self'; script-src 'self'; style-src 'self';"
+        return response
+MIDDLEWARE = [
+    ...
+    'your_app.middleware.ContentSecurityPolicyMiddleware',
+]
+
+# Enforce XSS protection in browsers
+SECURE_BROWSER_XSS_FILTER = True
+
+# Prevent the application from being embedded in an iframe
+X_FRAME_OPTIONS = 'DENY'
+
+# Prevent MIME type sniffing by browsers
+SECURE_CONTENT_TYPE_NOSNIFF = True
