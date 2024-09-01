@@ -1,3 +1,4 @@
+"ExampleForm"
 <!-- form_example.html -->
 <form method="post" action="/submit/">
     {% csrf_token %}
