@@ -24,3 +24,17 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+
+from rest_framework.filters import SearchFilter
+
+class BookListView(generics.ListAPIView):
+    """
+    Retrieves a list of all books with filtering and search capabilities.
+    """
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filterset_fields = ['title', 'author', 'publication_year']
+    search_fields = ['title', 'author__name']
+
