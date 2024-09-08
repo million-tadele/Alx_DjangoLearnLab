@@ -27,3 +27,27 @@ class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         fields = ['id', 'name', 'books']
+
+
+
+class BookCreateView(generics.CreateAPIView):
+    """
+    Customizes the creation of a new book and ensures validation.
+    """
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+    def perform_create(self, serializer):
+        # Add custom logic before saving, if needed
+        serializer.save()
+
+class BookUpdateView(generics.UpdateAPIView):
+    """
+    Customizes the update of a book.
+    """
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+    def perform_update(self, serializer):
+        # Add custom logic before saving, if needed
+        serializer.save()
