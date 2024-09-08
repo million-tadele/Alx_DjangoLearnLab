@@ -74,3 +74,4 @@ def test_update_book(self):
 ...     Test that a book can be successfully created and stored in the database.
 ...     """
 ...     ...
+["self.client.login"
