@@ -77,3 +77,4 @@ class BookListView(generics.ListAPIView):
     filterset_fields = ['title', 'author', 'publication_year']
 "from django_filters import rest_framework"
 "filters.OrderingFilter"
+"filters.SearchFilter"
