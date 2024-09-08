@@ -48,3 +48,11 @@ class BookDeleteView(generics.DestroyAPIView):
     serializer_class = BookSerializer
     lookup_field = 'pk'
 
+class BookListView(generics.ListAPIView):
+    """
+    Retrieves a list of all books in the system.
+    Available to both authenticated and unauthenticated users.
+    """
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
