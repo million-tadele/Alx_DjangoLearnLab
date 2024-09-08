@@ -12,3 +12,10 @@
 ...     path('books/<int:pk>/update/', BookUpdateView.as_view(), name='book-update'),
 ...     path('books/<int:pk>/delete/', BookDeleteView.as_view(), name='book-delete'),
 ... ]
+# api/urls.py
+from django.urls import path
+from .views import BookListView
+
+urlpatterns = [
+    path('books/', BookListView.as_view(), name='book-list'),
+]
