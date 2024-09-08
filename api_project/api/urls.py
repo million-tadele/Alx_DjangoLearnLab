@@ -6,3 +6,17 @@ Type "help", "copyright", "credits" or "license()" for more information.
 ... urlpatterns = [
 ...     path('books/', BookList.as_view(), name='book-list'),
 ... ]
+
+# api/urls.py
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import BookViewSet
+
+# Create a router and register the BookViewSet
+router = DefaultRouter()
+router.register(r'books', BookViewSet)
+
+# Include the router-generated URL patterns in the URL configuration
+urlpatterns = [
+    path('', include(router.urls)),
+]
