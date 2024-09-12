@@ -25,3 +25,10 @@ from django.urls import include
 urlpatterns = [
     path('', include('blog.urls')),
 ]
+from django.urls import path
+from .views import search_posts
+
+urlpatterns = [
+    path('search/', search_posts, name='search-posts'),
+    path('tags/<slug:tag_slug>/', PostsByTagView.as_view(), name='posts-by-tag'),
+]
