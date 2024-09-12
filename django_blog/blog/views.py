@@ -143,3 +143,14 @@ def search_posts(request):
             Q(title__icontains=query) | Q(content__icontains=query) | Q(tags__name__icontains=query)
         ).distinct()
     return render(request, 'blog/search_results.html', {'results': results, 'query': query})
+from django.views.generic import ListView
+from taggit.models import Tag
+from .models import Post
+
+class PostsByTagView(ListView):
+    model = Post
+    template_name = 'blog/posts_by_tag.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        return Post.objects.filter(tags__slug=self.kwargs.get('tag_slug')).distinct()
