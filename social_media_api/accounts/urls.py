@@ -22,3 +22,4 @@ router.register(r'users', UserViewSet)
 urlpatterns = [
     path('', include(router.urls)),
 ]
+"unfollow/<int:user_id>/", "follow/<int:user_id>"
