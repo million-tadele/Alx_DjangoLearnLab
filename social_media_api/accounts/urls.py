@@ -12,3 +12,13 @@ urlpatterns = [
     path('login/', obtain_auth_token, name='login'),
     path('profile/', UserProfileView.as_view(), name='profile'),
 ]
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import UserViewSet
+
+router = DefaultRouter()
+router.register(r'users', UserViewSet)
+
+urlpatterns = [
+    path('', include(router.urls)),
+]
