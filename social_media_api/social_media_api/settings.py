@@ -156,4 +156,10 @@ X_FRAME_OPTIONS = 'DENY'
 SECURE_SSL_REDIRECT = True  # If HTTPS is enabled
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # Other middleware...
+]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
