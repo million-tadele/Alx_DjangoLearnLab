@@ -17,3 +17,13 @@ feed_list = FeedViewSet.as_view({'get': 'list'})
 urlpatterns = [
     path('feed/', feed_list, name='feed'),
 ]
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import PostViewSet
+
+router = DefaultRouter()
+router.register(r'posts', PostViewSet)
+
+urlpatterns = [
+    path('', include(router.urls)),
+]
